@@ -1,0 +1,247 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/korevec/node-i2c#readme"
+
+    >i2c (v0.2.3)</a>
+</h1>
+<h4>Native bindings for i2c-dev. Plays well with Raspberry Pi and BeagleBone.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.i2c">module i2c</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">i2c.</span>usingDomains</span>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.i2c.i2c">
+            function <span class="apidocSignatureSpan"></span>i2c
+            <span class="apidocSignatureSpan">(address1, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.i2c.EventEmitter">
+            function <span class="apidocSignatureSpan">i2c.</span>EventEmitter
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.i2c.init">
+            function <span class="apidocSignatureSpan">i2c.</span>init
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.i2c.listenerCount">
+            function <span class="apidocSignatureSpan">i2c.</span>listenerCount
+            <span class="apidocSignatureSpan">(emitter, type)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">i2c.</span>defaultMaxListeners</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">i2c.</span>__super__</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.i2c" id="apidoc.module.i2c">module i2c</a></h1>
+
+
+
+
+    <h2>
+        <a href="#apidoc.element.i2c.i2c" id="apidoc.element.i2c.i2c">
+        function <span class="apidocSignatureSpan"></span>i2c
+        <span class="apidocSignatureSpan">(address1, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function i2c(address1, options) {
+  this.address = address1;
+  this.options = options != null ? options : {};
+  _.defaults(this.options, {
+    debug: false,
+    device: &#x22;/dev/i2c-1&#x22;
+  });
+  if (this.options.debug) {
+    require(&#x27;repl&#x27;).start({
+      prompt: &#x22;i2c &#x3e; &#x22;
+    }).context.wire = this;
+    process.stdin.emit(&#x27;data&#x27;, &#x27;&#x27;);
+  }
+  process.on(&#x27;exit&#x27;, (function(_this) {
+    return function() {
+      return _this.close();
+    };
+  })(this));
+  this.on(&#x27;data&#x27;, (function(_this) {
+    return function(data) {
+      return _this.history.push(data);
+    };
+  })(this));
+  this.on(&#x27;error&#x27;, function(err) {
+    return console.log(&#x22;Error: &#x22; + err);
+  });
+  this.open(this.options.device, (function(_this) {
+    return function(err) {
+      if (!err) {
+        return _this.setAddress(_this.address);
+      }
+    };
+  })(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.i2c.EventEmitter" id="apidoc.element.i2c.EventEmitter">
+        function <span class="apidocSignatureSpan">i2c.</span>EventEmitter
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.i2c.init" id="apidoc.element.i2c.init">
+        function <span class="apidocSignatureSpan">i2c.</span>init
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">init = function () {
+  this.domain = null;
+  if (EventEmitter.usingDomains) {
+    // if there is an active domain, then attach to it.
+    domain = domain || require(&#x27;domain&#x27;);
+    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+      this.domain = domain.active;
+    }
+  }
+
+  if (!this._events || this._events === Object.getPrototypeOf(this)._events) {
+    this._events = new EventHandlers();
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.i2c.listenerCount" id="apidoc.element.i2c.listenerCount">
+        function <span class="apidocSignatureSpan">i2c.</span>listenerCount
+        <span class="apidocSignatureSpan">(emitter, type)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
+  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
